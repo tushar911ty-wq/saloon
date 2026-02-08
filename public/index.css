@@ -983,11 +983,7 @@ textarea {
   background-repeat: no-repeat;
 }
 
-/* Assuming these images were not provided or are missing, checking later. 
-   If not in directory, these might break. But user CSS had them. 
-   I will fix the path assuming they exist or user will add them.
-   Wait, I didn't see left-decor.png in the file list.
-   I'll update the path to images/ just in case.
+
 */
 .decor-left {
   left: 0;
@@ -1002,7 +998,7 @@ textarea {
 /* Responsive */
 @media (max-width: 768px) {
   .contact-section {
-    height: auto; /* let height grow naturally on mobile */
+    height: auto; 
     padding: 40px 15px;
   }
   
