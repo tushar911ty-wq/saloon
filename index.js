@@ -82,6 +82,10 @@ if (track && slides.length > 0) {
 
 // Contact Form
 const contactForm = document.getElementById('contactForm');
+const API_BASE_URL = (window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost') && window.location.port !== '3000'
+  ? 'http://localhost:3000'
+  : '';
+
 if (contactForm) {
   contactForm.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -95,7 +99,7 @@ if (contactForm) {
     statusMsg.style.color = 'blue';
 
     try {
-      const response = await fetch('http://localhost:3000/api/contact', {
+      const response = await fetch(`${API_BASE_URL}/api/contact`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -131,7 +135,7 @@ if (newsletterForm) {
     statusMsg.style.color = 'blue';
 
     try {
-      const response = await fetch('http://localhost:3000/api/newsletter', {
+      const response = await fetch(`${API_BASE_URL}/api/newsletter`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

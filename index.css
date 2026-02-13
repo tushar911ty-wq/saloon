@@ -6,7 +6,7 @@ body {
   /* width: 100%; */
   margin: 0;
   padding: 0;
-  box-sizing: border-box ;
+  box-sizing: border-box;
   font-family: Arial, sans-serif;
   width: 100%;
   overflow-x: hidden;
@@ -36,6 +36,7 @@ body {
   font-weight: bold;
   margin-left: 10%;
 }
+
 .logo img {
   height: 40px;
   margin-right: 8px;
@@ -47,12 +48,14 @@ nav {
   gap: 20px;
   align-items: center;
 }
+
 nav a {
   text-decoration: none;
   color: #333;
   font-weight: 500;
   transition: color 0.3s;
 }
+
 nav a:hover {
   color: #f28a7e;
 }
@@ -61,6 +64,7 @@ nav a:hover {
 .dropdown {
   position: relative;
 }
+
 .dropdown summary {
   list-style: none;
   cursor: pointer;
@@ -68,12 +72,15 @@ nav a:hover {
   padding: 8px 12px;
   display: inline-block;
 }
+
 .dropdown summary:hover {
   color: #f28e79;
 }
+
 .dropdown summary::-webkit-details-marker {
   display: none;
 }
+
 .dropdown .menu {
   position: absolute;
   top: 100%;
@@ -87,16 +94,19 @@ nav a:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   z-index: 10;
 }
+
 .dropdown .menu a {
   padding: 10px;
   white-space: nowrap;
   text-decoration: none;
   color: #333;
 }
+
 .dropdown .menu a:hover {
   background: #f5f5f5;
   color: #f28a7e;
 }
+
 .dropdown[open] .menu {
   display: flex;
 }
@@ -145,7 +155,8 @@ nav a:hover {
   }
 
   .dropdown .menu {
-    position: static; /* Important: allow it to expand inside nav */
+    position: static;
+    /* Important: allow it to expand inside nav */
     box-shadow: none;
     background: transparent;
     border-radius: 0;
@@ -196,17 +207,31 @@ nav a:hover {
 }
 
 @keyframes fadeSlide {
-  0% { opacity: 0; }
-  5% { opacity: 1; }
-  45% { opacity: 1; }
-  50% { opacity: 0; }
-  100% { opacity: 0; }
+  0% {
+    opacity: 0;
+  }
+
+  5% {
+    opacity: 1;
+  }
+
+  45% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 0;
+  }
 }
 
 .overlay {
   position: relative;
   z-index: 1;
-  background: rgba(0,0,0,0.4);
+  background: rgba(0, 0, 0, 0.4);
   padding: 30px;
   text-align: center;
   border-radius: 10px;
@@ -274,7 +299,7 @@ nav a:hover {
   background: white;
   border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
 }
 
@@ -312,7 +337,7 @@ nav a:hover {
     top: 60px;
     right: 0;
     width: 200px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   }
 
   nav.show {
@@ -578,10 +603,30 @@ nav a:hover {
 }
 
 /* Icon positions in diamond shape */
-.icon-wrapper a:nth-child(1) { top: 0; left: 40px; }   /* top */
-.icon-wrapper a:nth-child(2) { top: 40px; left: 0; }   /* left */
-.icon-wrapper a:nth-child(3) { top: 40px; left: 80px;} /* right */
-.icon-wrapper a:nth-child(4) { top: 80px; left: 40px;} /* bottom */
+.icon-wrapper a:nth-child(1) {
+  top: 0;
+  left: 40px;
+}
+
+/* top */
+.icon-wrapper a:nth-child(2) {
+  top: 40px;
+  left: 0;
+}
+
+/* left */
+.icon-wrapper a:nth-child(3) {
+  top: 40px;
+  left: 80px;
+}
+
+/* right */
+.icon-wrapper a:nth-child(4) {
+  top: 80px;
+  left: 40px;
+}
+
+/* bottom */
 
 .team-card h3 {
   margin-top: 15px;
@@ -601,7 +646,8 @@ nav a:hover {
   text-align: center;
   font-family: 'Poppins', sans-serif;
   margin-top: 10%;
-  padding: 0 20px; /* Adds side padding on small screens */
+  padding: 0 20px;
+  /* Adds side padding on small screens */
 }
 
 .customer-style h2 {
@@ -686,14 +732,16 @@ nav a:hover {
 /* =========================================================== */
 
 
-:root{
-  --brand:#f28a7e;
-  --brand-2:#f5a590;
-  --text:#777;
-  --bg:#f2f4f6;
-  --card-shadow:0 5px 15px rgba(0,0,0,.06);
-  --slide-height: 230px;     /* card height */
-  --auto: 5000ms;            /* autoplay delay */
+:root {
+  --brand: #f28a7e;
+  --brand-2: #f5a590;
+  --text: #777;
+  --bg: #f2f4f6;
+  --card-shadow: 0 5px 15px rgba(0, 0, 0, .06);
+  --slide-height: 230px;
+  /* card height */
+  --auto: 5000ms;
+  /* autoplay delay */
 }
 
 /* body{margin:0;font-family:Poppins,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial,sans-serif;background:var(--bg);color:#222} */
@@ -716,12 +764,14 @@ nav a:hover {
   width: 100%;
   border-radius: 10px;
 }
+
 .slider-track {
   display: flex;
   width: 100%;
   transition: transform 0.6s ease;
   will-change: transform;
 }
+
 .slide {
   flex: 0 0 100%;
   display: flex;
@@ -746,6 +796,7 @@ nav a:hover {
   position: relative;
   isolation: isolate;
 }
+
 .t-card::after {
   content: "";
   position: absolute;
@@ -764,6 +815,7 @@ nav a:hover {
   border-radius: 50%;
   overflow: hidden;
 }
+
 .avatar img {
   width: 100%;
   height: 100%;
@@ -779,12 +831,14 @@ nav a:hover {
   line-height: 1.65;
   font-style: italic;
 }
+
 .t-text h4 {
   margin: 14px 0 0;
   font-weight: 600;
   color: var(--brand);
   font-size: 16px;
 }
+
 .t-text h4 span {
   font-weight: 400;
   color: var(--brand-2);
@@ -800,6 +854,7 @@ nav a:hover {
   user-select: none;
   flex-wrap: wrap;
 }
+
 .arrow {
   width: 40px;
   height: 40px;
@@ -811,10 +866,12 @@ nav a:hover {
   cursor: pointer;
   transition: transform 0.12s ease, background 0.2s;
 }
+
 .arrow:hover {
   background: #fff7f6;
   transform: translateY(-1px);
 }
+
 .arrow svg {
   width: 18px;
   height: 18px;
@@ -828,6 +885,7 @@ nav a:hover {
   display: flex;
   gap: 10px;
 }
+
 .dot {
   width: 10px;
   height: 10px;
@@ -836,6 +894,7 @@ nav a:hover {
   opacity: 0.7;
   transition: opacity 0.2s, transform 0.2s;
 }
+
 .dot.active {
   background: #5e7269;
   opacity: 1;
@@ -850,10 +909,12 @@ nav a:hover {
     padding: 24px;
     gap: 16px;
   }
+
   .avatar {
     width: 72px;
     height: 72px;
   }
+
   .t-text {
     text-align: left;
   }
@@ -864,20 +925,25 @@ nav a:hover {
     padding: 20px;
     gap: 12px;
   }
+
   .t-text p {
     font-size: 14px;
   }
+
   .t-text h4 {
     font-size: 15px;
   }
+
   .controls {
     gap: 10px;
     margin-top: 20px;
   }
+
   .arrow {
     width: 36px;
     height: 36px;
   }
+
   .arrow svg {
     width: 16px;
     height: 16px;
@@ -893,7 +959,8 @@ nav a:hover {
   padding: 40px 50px;
   position: relative;
   width: 100%;
-  height: 100vh; /* full height on laptops/desktops */
+  height: 100vh;
+  /* full height on laptops/desktops */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -926,7 +993,8 @@ nav a:hover {
   margin-left: 15%;
 }
 
-.form-left, .form-right {
+.form-left,
+.form-right {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -935,10 +1003,11 @@ nav a:hover {
 }
 
 /* Inputs & textarea */
-input, textarea {
+input,
+textarea {
   width: 100%;
   max-width: 400px;
-  padding: 15px; 
+  padding: 15px;
   border: 1px solid #f3c5b5;
   outline: none;
   border-radius: 8px;
@@ -946,12 +1015,13 @@ input, textarea {
   font-family: 'Poppins', sans-serif;
   background: rgba(255, 255, 255, 0.9);
   resize: vertical;
-  margin: 0 auto; 
-  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  margin: 0 auto;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
   transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-input:focus, textarea:focus {
+input:focus,
+textarea:focus {
   border-color: #f28a7e;
   box-shadow: 0 0 0 4px rgba(242, 138, 126, 0.2);
 }
@@ -982,7 +1052,8 @@ textarea {
 }
 
 /* Decorative bottom images */
-.decor-left, .decor-right {
+.decor-left,
+.decor-right {
   position: absolute;
   bottom: 0;
   width: 100px;
@@ -992,8 +1063,7 @@ textarea {
 }
 
 
-*/
-.decor-left {
+*/ .decor-left {
   left: 0;
   background-image: url('images/left-decor.png');
 }
@@ -1006,15 +1076,16 @@ textarea {
 /* Responsive */
 @media (max-width: 768px) {
   .contact-section {
-    height: auto; 
+    height: auto;
     padding: 40px 15px;
   }
-  
+
   .contact-form {
     flex-direction: column;
   }
-  
-  .decor-left, .decor-right {
+
+  .decor-left,
+  .decor-right {
     width: 60px;
     height: 60px;
   }
@@ -1036,7 +1107,7 @@ textarea {
   justify-content: center;
   /* background-size: cover; */
   align-items: center;
-  background-color: #111; 
+  background-color: #111;
 }
 
 .container {
@@ -1049,9 +1120,11 @@ textarea {
 
 .footer-grid {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 2fr;
+  grid-template-columns: 1.5fr 1fr 1fr;
   gap: 30px;
   width: 100%;
+  justify-content: center;
+  /* Center the grid items if they don't span full width */
 }
 
 /* Footer Sections */

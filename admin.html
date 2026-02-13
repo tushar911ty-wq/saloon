@@ -163,9 +163,13 @@
 
     <script>
         async function loadData() {
+            const API_BASE_URL = (window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost') && window.location.port !== '3000'
+                ? 'http://localhost:3000'
+                : '';
+
             // Fetch Messages
             try {
-                const msgRes = await fetch('http://localhost:3000/api/messages');
+                const msgRes = await fetch(`${API_BASE_URL}/api/messages`);
                 const messages = await msgRes.json();
                 renderMessages(messages);
             } catch (error) {
@@ -177,7 +181,7 @@
 
             // Fetch Subscribers
             try {
-                const subRes = await fetch('http://localhost:3000/api/subscribers');
+                const subRes = await fetch(`${API_BASE_URL}/api/subscribers`);
                 const subscribers = await subRes.json();
                 renderSubscribers(subscribers);
             } catch (error) {
@@ -235,5 +239,6 @@
     </script>
 
 </body>
+
 
 </html>

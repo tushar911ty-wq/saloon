@@ -5,11 +5,39 @@ const fs = require('fs');
 const path = require('path');
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
+// Basic Authentication Middleware
+const auth = (req, res, next) => {
+    // Check if the request is for admin.html
+    if (req.path === '/admin.html') {
+        const authHeader = req.headers.authorization;
+
+        if (!authHeader) {
+            res.setHeader('WWW-Authenticate', 'Basic');
+            return res.status(401).send('Authentication required');
+        }
+
+        const auth = Buffer.from(authHeader.split(' ')[1], 'base64').toString().split(':');
+        const user = auth[0];
+        const pass = auth[1];
+
+        // HARDCODED CREDENTIALS - CHANGE FOR PRODUCTION
+        if (user === 'admin' && pass === 'admin123') {
+            next();
+        } else {
+            res.setHeader('WWW-Authenticate', 'Basic');
+            return res.status(401).send('Access denied');
+        }
+    } else {
+        next();
+    }
+};
+
+app.use(auth);
 app.use(express.static(path.join(__dirname, '../')));
 
 // Helper function to get data
@@ -18,13 +46,33 @@ const getData = (filename) => {
     if (fs.existsSync(filePath)) {
         try {
             const fileContent = fs.readFileSync(filePath, 'utf8');
-            return JSON.parse(fileContent);
+            const data = JSON.parse(fileContent);
+            return Array.isArray(data) ? data : [];
         } catch (err) {
             console.error('Error reading data file:', err);
             return [];
         }
     }
     return [];
+};
+
+// Helper function to save data
+const saveData = (filename, newData) => {
+    const dataDir = path.join(__dirname, 'data');
+    if (!fs.existsSync(dataDir)) {
+        fs.mkdirSync(dataDir);
+    }
+
+    const filePath = path.join(dataDir, filename);
+    let currentData = getData(filename); // Reuse getData to get existing array
+
+    currentData.push(newData);
+
+    try {
+        fs.writeFileSync(filePath, JSON.stringify(currentData, null, 2));
+    } catch (err) {
+        console.error('Error writing data file:', err);
+    }
 };
 
 // API Routes
