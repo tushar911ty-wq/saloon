@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salon Admin Dashboard</title>
+    <style>
+        :root {
+            --brand: #f28a7e;
+            --brand-hover: #d77a50;
+            --bg: #f4f6f8;
+            --text: #333;
+            --card-bg: #fff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: var(--bg);
+            color: var(--text);
+        }
+
+        h1,
+        h2 {
+            color: #444;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+        }
+
+        .btn-refresh {
+            background-color: var(--brand);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+
+        .btn-refresh:hover {
+            background-color: var(--brand-hover);
+        }
+
+        .section {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            background-color: #f9f9f9;
+            font-weight: 600;
+            color: #555;
+        }
+
+        tr:hover {
+            background-color: #fcfcfc;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 20px;
+            color: #888;
+            font-style: italic;
+        }
+
+        .timestamp {
+            color: #888;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            th,
+            td {
+                padding: 8px 10px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h1>Admin Dashboard</h1>
+            <button class="btn-refresh" onclick="loadData()">Refresh Data</button>
+        </div>
+
+        <div class="section">
+            <h2>Messages</h2>
+            <div style="overflow-x: auto;">
+                <table id="messagesTable">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Message</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Messages will be inserted here -->
+                    </tbody>
+                </table>
+            </div>
+            <p id="noMessages" class="empty-state" style="display: none;">No messages found.</p>
+        </div>
+
+        <div class="section">
+            <h2>Newsletter Subscribers</h2>
+            <div style="overflow-x: auto;">
+                <table id="subscribersTable">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Subscribers will be inserted here -->
+                    </tbody>
+                </table>
+            </div>
+            <p id="noSubscribers" class="empty-state" style="display: none;">No subscribers yet.</p>
+        </div>
+    </div>
+
+    <script>
+        async function loadData() {
+            // Fetch Messages
+            try {
+                const msgRes = await fetch('http://localhost:3000/api/messages');
+                const messages = await msgRes.json();
+                renderMessages(messages);
+            } catch (error) {
+                console.error('Error fetching messages:', error);
+                // Assuming local dev without backend running if fetch fails
+                document.getElementById('messagesTable').getElementsByTagName('tbody')[0].innerHTML =
+                    '<tr><td colspan="5" style="text-align:center; color:red;">Error connecting to backend. Is server.js running?</td></tr>';
+            }
+
+            // Fetch Subscribers
+            try {
+                const subRes = await fetch('http://localhost:3000/api/subscribers');
+                const subscribers = await subRes.json();
+                renderSubscribers(subscribers);
+            } catch (error) {
+                console.error('Error fetching subscribers:', error);
+            }
+        }
+
+        function renderMessages(messages) {
+            const tbody = document.getElementById('messagesTable').querySelector('tbody');
+            const noMsg = document.getElementById('noMessages');
+            tbody.innerHTML = '';
+
+            if (!messages || messages.length === 0) {
+                noMsg.style.display = 'block';
+                return;
+            }
+            noMsg.style.display = 'none';
+
+            messages.forEach(msg => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                <td class="timestamp">${new Date(msg.date).toLocaleString()}</td>
+                <td>${msg.name || '-'}</td>
+                <td><a href="mailto:${msg.email}">${msg.email}</a></td>
+                <td>${msg.phone || '-'}</td>
+                <td>${msg.message}</td>
+            `;
+                tbody.appendChild(row);
+            });
+        }
+
+        function renderSubscribers(subscribers) {
+            const tbody = document.getElementById('subscribersTable').querySelector('tbody');
+            const noSub = document.getElementById('noSubscribers');
+            tbody.innerHTML = '';
+
+            if (!subscribers || subscribers.length === 0) {
+                noSub.style.display = 'block';
+                return;
+            }
+            noSub.style.display = 'none';
+
+            subscribers.forEach(sub => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                <td class="timestamp">${new Date(sub.date).toLocaleString()}</td>
+                <td><a href="mailto:${sub.email}">${sub.email}</a></td>
+            `;
+                tbody.appendChild(row);
+            });
+        }
+
+        // Load data on page load
+        document.addEventListener('DOMContentLoaded', loadData);
+    </script>
+
+</body>
+
+</html>

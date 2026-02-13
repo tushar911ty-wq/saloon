@@ -10,27 +10,26 @@ const PORT = 3000;
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, '../public')));
+app.use(express.static(path.join(__dirname, '../')));
 
-// Helper function to save data
-const saveData = (filename, data) => {
+// Helper function to get data
+const getData = (filename) => {
     const filePath = path.join(__dirname, 'data', filename);
-    let existingData = [];
     if (fs.existsSync(filePath)) {
         try {
             const fileContent = fs.readFileSync(filePath, 'utf8');
-            existingData = JSON.parse(fileContent);
+            return JSON.parse(fileContent);
         } catch (err) {
             console.error('Error reading data file:', err);
+            return [];
         }
     }
-    existingData.push(data);
-    fs.writeFileSync(filePath, JSON.stringify(existingData, null, 2));
+    return [];
 };
 
 // API Routes
 
-// Contact Form
+// Contact Form - POST
 app.post('/api/contact', (req, res) => {
     const { name, email, phone, message } = req.body;
     if (!name || !email || !message) {
@@ -43,14 +42,20 @@ app.post('/api/contact', (req, res) => {
         email,
         phone,
         message,
-        date: new Date().toISOString()
+        date: new Date().toISOString() // Keep ISO format for easy sorting/display
     };
 
     saveData('messages.json', newContact);
     res.status(200).json({ message: 'Message received successfully!' });
 });
 
-// Newsletter Subscription
+// Contact Form - GET
+app.get('/api/messages', (req, res) => {
+    const messages = getData('messages.json');
+    res.json(messages.reverse()); // Show newest first
+});
+
+// Newsletter Subscription - POST
 app.post('/api/newsletter', (req, res) => {
     const { email } = req.body;
     if (!email) {
@@ -65,6 +70,12 @@ app.post('/api/newsletter', (req, res) => {
 
     saveData('subscribers.json', newSubscriber);
     res.status(200).json({ message: 'Subscribed successfully!' });
+});
+
+// Newsletter Subscription - GET
+app.get('/api/subscribers', (req, res) => {
+    const subscribers = getData('subscribers.json');
+    res.json(subscribers.reverse());
 });
 
 // Start Server

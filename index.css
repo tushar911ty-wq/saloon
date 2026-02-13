@@ -937,19 +937,27 @@ nav a:hover {
 /* Inputs & textarea */
 input, textarea {
   width: 100%;
-  max-width: 350px;
-  padding: 12px; 
+  max-width: 400px;
+  padding: 15px; 
   border: 1px solid #f3c5b5;
   outline: none;
-  border-radius: 5px;
+  border-radius: 8px;
   font-size: 1rem;
-  background: white;
-  resize: none;
+  font-family: 'Poppins', sans-serif;
+  background: rgba(255, 255, 255, 0.9);
+  resize: vertical;
   margin: 0 auto; 
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input:focus, textarea:focus {
+  border-color: #f28a7e;
+  box-shadow: 0 0 0 4px rgba(242, 138, 126, 0.2);
 }
 
 textarea {
-  height: 150px;
+  min-height: 150px;
 }
 
 
