@@ -38,7 +38,7 @@ const auth = (req, res, next) => {
 };
 
 app.use(auth);
-app.use(express.static(path.join(__dirname, '../')));
+app.use(express.static(path.join(__dirname, '../dist')));
 
 // Helper function to get data
 const getData = (filename) => {
