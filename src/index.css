@@ -444,7 +444,7 @@ nav a:hover {
   justify-content: flex-start;
   min-height: 100vh;
   /* Fixed image path in CSS */
-  background: url("images/top_one-removebg-preview.png") no-repeat right center;
+  background: url("/images/top_one-removebg-preview.png") no-repeat right center;
   background-size: contain;
   background-color: #fdfdf8;
   padding: 20px;
@@ -965,7 +965,7 @@ nav a:hover {
   flex-direction: column;
   justify-content: center;
   /* Fixed image path */
-  background: url('images/footer.webp');
+  background: url('/images/footer.webp');
   background-size: cover;
   /* margin-bottom: -9%; */
 }
@@ -1063,14 +1063,14 @@ textarea {
 }
 
 
-*/ .decor-left {
+.decor-left {
   left: 0;
-  background-image: url('images/left-decor.png');
+  background-image: url('/images/left-decor.png');
 }
 
 .decor-right {
   right: 0;
-  background-image: url('images/right-decor.png');
+  background-image: url('/images/right-decor.png');
 }
 
 /* Responsive */
