@@ -1065,12 +1065,10 @@ textarea {
 
 .decor-left {
   left: 0;
-  background-image: url('/images/left-decor.png');
 }
 
 .decor-right {
   right: 0;
-  background-image: url('/images/right-decor.png');
 }
 
 /* Responsive */
